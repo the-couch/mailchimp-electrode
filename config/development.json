@@ -1,0 +1,7 @@
+{
+  "plugins": {
+    "mailchimp": {
+      "module": "./server/plugins/mailchimp"
+    }
+  }
+}
