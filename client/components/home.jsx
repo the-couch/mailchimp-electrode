@@ -11,6 +11,14 @@ class Home extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     console.log('hey dude whatup');
+    fetch('/subscribe', {
+      method: 'GET',
+      query: {email: 'kevin@bagel.com'},
+      body: {
+        email: 'kevin@bagel.com'
+      }
+    })
+      .then((res) => console.log(res))
   }
 
   render() {
