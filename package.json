@@ -39,6 +39,7 @@
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
+    "formsy-react": "^0.18.1",
     "lodash": "^4.10.1",
     "mailchimp-api-v3": "^1.6.0"
   },

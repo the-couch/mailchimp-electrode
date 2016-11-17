@@ -1,19 +1,31 @@
-import React, {PropTypes, Component} from "react";
-import {connect} from "react-redux";
-import {toggleCheck, incNumber, decNumber} from "../actions";
+import React, {PropTypes, Component} from 'react'
+import Formsy from 'formsy-react'
+import Input from './Input'
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.state = {
+      canSubmit: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.enableButton = this.enableButton.bind(this)
+    this.disableButton = this.disableButton.bind(this)
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-    console.log('hey dude whatup');
-    let data = {
-      email: 'kevin@bagel.com'
-    }
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    })
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    })
+  }
+
+  handleSubmit(data) {
     fetch('/subscribe', {
       method: 'POST',
       body: JSON.stringify(data)
@@ -21,8 +33,8 @@ class Home extends Component {
       .then((res) => res.json())
       .then((json) => {
         console.log(json)
+        // Do whatever you would like, display a thank you message, or inform the user if they are already a member
       })
-
   }
 
   render() {
@@ -30,21 +42,14 @@ class Home extends Component {
       <div>
         <h1>Mailchimp subscribe</h1>
         <div>
-          <div>
-          <form onSubmit={this.onSubmit}>
-            <input type="email" name="email" />
-            <button type="submit">Submit Email</button>
-          </form>
-          </div>
+          <Formsy.Form onValidSubmit={this.handleSubmit} onValid={this.enableButton} onInvalid={this.disableButton}>
+            <Input name="email" validations="isEmail" validationError="Non-valid Email" required label="Email Address" />
+            <button type="submit" disabled={!this.state.canSubmit} className="btn btn--black">Subscribe</button>
+          </Formsy.Form>
         </div>
       </div>
     );
   }
 }
 
-Home.propTypes = {
-  checked: PropTypes.bool,
-  value: PropTypes.number.isRequired
-};
-
-export default connect()(Home);
+export default Home;

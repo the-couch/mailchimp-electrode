@@ -12,7 +12,7 @@
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
-        "pageTitle": "Brandless",
+        "pageTitle": "Mailchimp Electrode",
         "paths": {
           "/{args*}": {
             "content": {
