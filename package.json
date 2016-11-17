@@ -1,5 +1,5 @@
 {
-  "name": "brandless",
+  "name": "simple landing page with mailchimp",
   "version": "0.0.1",
   "description": "Simple landing page with Mailchimp",
   "homepage": "",
@@ -18,7 +18,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "iamkevingreen/Brandless"
+    "url": "iamkevingreen/mailchimp-electrode"
   },
   "engines": {
     "node": "^4.x.x || ^6.x.x",

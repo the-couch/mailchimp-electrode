@@ -6,31 +6,18 @@ const mailchimp = new Mailchimp(process.env.MAILCHIMP_API);
 
 exports.register = (server, options, next) => {
 
-  const postMailChimpPromises = () => {
-    console.log('mailchimp promise');
-    return mailchimp.post('/lists/8fb6d16d29/members', {
-      email_address: email,
-      status: 'subscribed'
-    }, (err, result) => {
-      if (err) {
-        console.log(err)
-        return err
-      } else {
-        return result
-      }
-    })
-  }
-
   const postMailChimp = (request, reply) => {
-    console.log('anything', request, reply);
-
-    // return Promise.all(postMailChimpPromises)
-    //   .then((response) => reply(response))
-    //   .catch((err) => reply(err));
+    let object = JSON.parse(request.payload)
+    mailchimp.post('/lists/8fb6d16d29/members', {
+      email_address: object.email,
+      status: 'subscribed'
+    })
+    .then((res) => reply(null, JSON.stringify(res)))
+    .catch((err) => reply(null, JSON.stringify(err)));
   }
 
   server.route({
-    method: "GET",
+    method: "POST",
     path: '/subscribe',
     handler: (request, reply) => postMailChimp(request, reply)
   })
