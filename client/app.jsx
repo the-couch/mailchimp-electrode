@@ -4,8 +4,8 @@
 
 import React from "react";
 import {render} from "react-dom";
-import {routes} from "./routes";
-import {Router} from "react-router";
+
+import { Router, Route, IndexRoute, browserHistory } from "react-router";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import "./styles/base.css";
@@ -17,14 +17,13 @@ import rootReducer from "./reducers";
 // DOM is created.
 //
 
+import Home from "./components/home";
+
 window.webappStart = () => {
-  const initialState = window.__PRELOADED_STATE__;
-  const store = createStore(rootReducer, initialState);
   render(
-    <Provider store={store}>
-      <Router>{routes}</Router>
-    </Provider>,
+    <Router history={browserHistory}>
+      <Route path="/" component={Home}/>
+    </Router>,
     document.querySelector(".js-content")
   );
 };
-
